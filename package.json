@@ -1,0 +1,16 @@
+{
+  "name": "akshar",
+  "version": "0.0.1",
+  "description": "Easily create and view fonts",
+  "main": "web.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": "",
+  "keywords": [
+    "typography",
+    "generator"
+  ],
+  "author": "jay Kanakiya",
+  "license": "Apache2"
+}
