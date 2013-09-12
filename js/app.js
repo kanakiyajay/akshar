@@ -9,7 +9,7 @@ var App = angular.module('akshar',[]);
 
 App.factory('Model',function  () {
   return [
-    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" }
+    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2}
   ]
 });
 
@@ -24,7 +24,7 @@ App.controller('mainCtrl',function  ($scope,Model) {
   $scope.getStyle = function  (index) {
     var cssStyles = "" ;
     var cssObj = $scope.model[index] ;
-    var stylesList = [ "font_size" , "letter_spacing" , "color" , "background_color"] ;
+    var stylesList = [ "font_size" , "letter_spacing" , "color" , "background_color" , "line_height" ] ;
     stylesList.forEach(function  (i) {
       cssStyles += i.replace("_","-") + ":" + cssObj[i] + ";" ;
     });
@@ -34,6 +34,16 @@ App.controller('mainCtrl',function  ($scope,Model) {
   $scope.init = function  () {
     $scope.current = $scope.model[0];
   }
+});
+
+App.controller('canvasCtrl',function  ($scope) {
+  $scope.init = function  () {
+     gridOverlay($("#box"));
+  }
+  $scope.canvasClk = function  (e) {
+    console.log($(e.target));
+  }
+
 });
 
 /* Directives */
@@ -50,7 +60,7 @@ App.directive('uiColorpicker', function() {
                 color: ngModel.$viewValue,
                 clickoutFiresChange : true ,
                 showInput : true ,
-                change: function(color) {
+                move: function(color) {
                     scope.$apply(function() {
                       ngModel.$setViewValue(color.toHexString());
                     });
