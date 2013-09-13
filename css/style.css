@@ -1,4 +1,7 @@
-#canvasLines{
+#dabblet{
   background: -webkit-canvas(animation) white;
   height:20em ;
+}
+#box{
+  background-color: transparent;
 }

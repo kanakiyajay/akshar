@@ -8,14 +8,14 @@ $.fn.textWidth = function(){
 };
 
 function gridOverlay ($elem) {
-  var container = $('#canvasLines')[0] ;
+
   var supported = true;
 
   if (!!!document.getCSSCanvasContext) {
     supported = false;
   }
-
-  var computedStyle = window.getComputedStyle(container);
+  console.log($('#dabblet')[0]);
+  var computedStyle = window.getComputedStyle($('#dabblet')[0]);
   var WIDTH = parseInt(computedStyle.width);
   var HEIGHT = parseInt(computedStyle.height);
 

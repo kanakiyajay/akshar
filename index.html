@@ -5,12 +5,15 @@
   <meta name='description' content='Create great font-styles'/>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/spectrum.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/spectrum.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/canvas.js"></script>
   <script type="text/javascript" src="js/angular.unstable.min.js"></script>
+  <script type="text/javascript" src="js/angular-slider.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
 </head>
 
@@ -46,20 +49,31 @@
           </div>
         </form>
       </div>
-      <div class="col-lg-8" ng-repeat="type in model" ng-model="type" ng-click="toToolbar($index)">
-          <h1 style="{{getStyle($index)}}">{{type.text}}</h1>
-          <pre><code class="code">{{getStyle($index)}}</code></pre>
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-12">
+            <div ui-slider="{range:true , animate : true ,max : 910 }" ng-model="current.verticalpadding"></div>
+            <input type="number" ng-model="current.verticalpadding[0]" />
+            <input type="number" value="{{910-current.verticalpadding[1]}}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12" id="dabblet" ng-repeat="typos in model" ng-click="toToolbar($index)">
+            <h1 strip-br="true" contenteditable ng-model="current.text" id="box" style="{{getStyle($index)}}">{{current.text}}</h1>
+            <pre><code class="code">{{getStyle($index)}}</code></pre>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-12" ng-model="model">
         {{ model | json }}
       </div>
+      <div class="col-lg-12" ng-model="model">
+        {{ current | json }}
+      </div>
     </div>
-  </div>
-
-  <div class="container" id="canvasLines" ng-controller="canvasCtrl" ng-init="init()">
-    <h1 id="box">Jay Kanakiya</h1>
   </div>
 </body>
 </html>
