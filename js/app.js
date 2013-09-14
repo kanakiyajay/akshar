@@ -9,13 +9,33 @@ var App = angular.module('akshar',['ui.slider']);
 
 App.factory('Model',function  () {
   return [
-    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2 , verticalpadding : [0,800] }
+    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2 , horizontalpadding : [0,800] , verticalpadding : 280}
   ]
 });
 
 App.controller('mainCtrl',function  ($scope,Model) {
   $scope.model = Model ;
-  //$scope.current = { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2 , verticalpadding : [0,800] }
+
+  /* Watchers for Padding */
+
+  $scope.$watch('current.horizontalpadding[0]', function(newval, oldval){
+          if (newval !== oldval ) {
+            $scope.current.horizontalpadding[1] = newval+245 ;
+            gridOverlay($("#box"));
+          };
+    }, true);
+
+  /*
+  $scope.$watch('current.horizontalpadding[1]', function(newval, oldval){
+        if (newval !== oldval ) {
+        $scope.current.horizontalpadding[0] = 245 - newval ;
+      };
+    }, true);
+  */
+
+  /*  End Watchers */
+
+  /* Functions*/
 
   $scope.toToolbar = function  (r) {
     $scope.current = $scope.model[r] ;
@@ -28,6 +48,14 @@ App.controller('mainCtrl',function  ($scope,Model) {
     stylesList.forEach(function  (i) {
       cssStyles += i.replace("_","-") + ":" + cssObj[i] + ";" ;
     });
+
+    /* For  Paddings  */
+
+    cssStyles += "left :" + cssObj.horizontalpadding[0] + "px ;" ;
+    //cssStyles += "padding-right :"  + (920-cssObj.horizontalpadding[1]) + "px ;" ;
+    cssStyles += "top :" + (280 - cssObj.verticalpadding) + "px ;" ;
+    //cssStyles += "margin-bottom :"  + (280-cssObj.horizontalpadding[0]) + "px ;" ;
+
     return cssStyles ;
   }
 

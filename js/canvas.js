@@ -14,7 +14,7 @@ function gridOverlay ($elem) {
   if (!!!document.getCSSCanvasContext) {
     supported = false;
   }
-  console.log($('#dabblet')[0]);
+
   var computedStyle = window.getComputedStyle($('#dabblet')[0]);
   var WIDTH = parseInt(computedStyle.width);
   var HEIGHT = parseInt(computedStyle.height);

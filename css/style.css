@@ -1,7 +1,15 @@
 #dabblet{
   background: -webkit-canvas(animation) white;
   height:20em ;
+  position: relative;
 }
 #box{
-  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* jQuery UI Over-ride */
+.ui-slider-vertical {
+  height: 313px;
 }

@@ -25,6 +25,7 @@ Websites Referred
 * http://cssdeck.com/labs/css3-range-slider-functional
 * http://mappatool.com/
 * https://github.com/angular-ui/ui-slider
+* http://prajwalkman.github.io/angular-slider/
 * http://docs.angularjs.org/api/ng.directive:ngModel.NgModelController
 
 Libraries
