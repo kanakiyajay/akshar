@@ -6,14 +6,13 @@ TO BE DONE
 []  text-align
 []  spacing
 []  font
-[]  line-height
+[x]  line-height
 []  font-weight
 [x]color-picker
 []  multiple texts
 []  side by side compare
 []  canvas grid lines
-[]  margin-padding easily change
-[]  contenteditable
+[x]  contenteditable
 []  localStorage
 []  Color-palette
 
@@ -27,6 +26,7 @@ Websites Referred
 * https://github.com/angular-ui/ui-slider
 * http://prajwalkman.github.io/angular-slider/
 * http://docs.angularjs.org/api/ng.directive:ngModel.NgModelController
+* https://github.com/mattwiebe/Better-Google-Fonts
 
 Libraries
 

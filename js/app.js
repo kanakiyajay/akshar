@@ -7,34 +7,22 @@
 
 var App = angular.module('akshar',['ui.slider']);
 
+App.constant('config',{
+  key : "AIzaSyAcU_2-bd-5I8WrH9CEM1kIF6ArVfdjgiI" ,
+  apiBase: 'http://fonts.googleapis.com/css?family='
+});
+
 App.factory('Model',function  () {
   return [
-    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2 , horizontalpadding : [0,800] , verticalpadding : 280}
+    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2 , horizontalpadding : 0 , verticalpadding : 280}
   ]
 });
 
-App.controller('mainCtrl',function  ($scope,Model) {
+App.controller('mainCtrl',function  ($scope,$http,Model,config) {
+
   $scope.model = Model ;
-
-  /* Watchers for Padding */
-
-  $scope.$watch('current.horizontalpadding[0]', function(newval, oldval){
-          if (newval !== oldval ) {
-            $scope.current.horizontalpadding[1] = newval+245 ;
-            gridOverlay($("#box"));
-          };
-    }, true);
-
-  /*
-  $scope.$watch('current.horizontalpadding[1]', function(newval, oldval){
-        if (newval !== oldval ) {
-        $scope.current.horizontalpadding[0] = 245 - newval ;
-      };
-    }, true);
-  */
-
-  /*  End Watchers */
-
+  $scope.fonts = [] ;
+  
   /* Functions*/
 
   $scope.toToolbar = function  (r) {
@@ -49,22 +37,35 @@ App.controller('mainCtrl',function  ($scope,Model) {
       cssStyles += i.replace("_","-") + ":" + cssObj[i] + ";" ;
     });
 
-    /* For  Paddings  */
+    /* For  Positioning  */
 
-    cssStyles += "left :" + cssObj.horizontalpadding[0] + "px ;" ;
-    //cssStyles += "padding-right :"  + (920-cssObj.horizontalpadding[1]) + "px ;" ;
+    cssStyles += "left :" + cssObj.horizontalpadding + "px ;" ;
     cssStyles += "top :" + (280 - cssObj.verticalpadding) + "px ;" ;
-    //cssStyles += "margin-bottom :"  + (280-cssObj.horizontalpadding[0]) + "px ;" ;
+
+    /* Font-Family */
+
+    cssStyles += 'font-family : "' + $scope.currentfont.family + '"' ;
 
     return cssStyles ;
   }
 
-  $scope.init = function  () {
-    $scope.current = $scope.model[0];
-    $(document).ready(function  () {
-      gridOverlay($("#box"));
+  $scope.getFonts = function  () {
+    $http.get('https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key='+config.key)
+      .then(function  (res) {
+        $scope.fonts = res.data.items ;
+        console.log(res.data.items[1]);
     });
   }
+
+  $scope.getFontUrl = function  () {
+    return config.apiBase + $scope.currentfont.family.replace(' ','+') ;
+  }
+
+  $scope.init = function  () {
+    $scope.current = $scope.model[0];
+    $scope.currentfont = { family : "Oswald" } ;
+  }
+
 });
 
 /* Directives */
