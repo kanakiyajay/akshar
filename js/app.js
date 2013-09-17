@@ -3,22 +3,34 @@
 ** Licensed under the Apache License v2.0
 ** http://www.apache.org/licenses/LICENSE-2.0
 ** Built by Jay Kanakiya ( @techiejayk )
+** Horizontal Width = 910 , Vertical Width = 280 
 **/
 
 var App = angular.module('akshar',['ui.slider']);
 
-App.constant('config',{
-  key : "AIzaSyAcU_2-bd-5I8WrH9CEM1kIF6ArVfdjgiI" ,
-  apiBase: 'http://fonts.googleapis.com/css?family='
-});
-
 App.factory('Model',function  () {
   return [
-    { text : "Jay Kanakiya" , font_size : 40 , letter_spacing : 1 , color : "#000" , background_color : "#fff" , line_height : 2 , horizontalpadding : 0 , verticalpadding : 280}
+    { 
+      text : "Jay Kanakiya" , 
+      font : "Oswald" ,
+      font_size : 40 , 
+      font_weight : 400 , 
+      letter_spacing : 1 , 
+      color : "#000" , 
+      background_color : "#ccc" , 
+      horizontalpadding : 337 , 
+      verticalpadding : 207,
+      text_shadow : {
+        x : 1 ,
+        y : 1 ,
+        blur : 1 ,
+        color : '#ccc'
+      }
+    }
   ]
 });
 
-App.controller('mainCtrl',function  ($scope,$http,Model,config) {
+App.controller('mainCtrl',function  ($scope,$http,Model) {
 
   $scope.model = Model ;
   $scope.fonts = [] ;
@@ -32,7 +44,7 @@ App.controller('mainCtrl',function  ($scope,$http,Model,config) {
   $scope.getStyle = function  (index) {
     var cssStyles = "" ;
     var cssObj = $scope.model[index] ;
-    var stylesList = [ "font_size" , "letter_spacing" , "color" , "background_color" , "line_height"] ;
+    var stylesList = [ "font_size" , "letter_spacing" , "color" , "background_color" , "font_weight"] ;
     stylesList.forEach(function  (i) {
       cssStyles += i.replace("_","-") + ":" + cssObj[i] + ";" ;
     });
@@ -44,26 +56,30 @@ App.controller('mainCtrl',function  ($scope,$http,Model,config) {
 
     /* Font-Family */
 
-    cssStyles += 'font-family : "' + $scope.currentfont.family + '"' ;
+    cssStyles += 'font-family : "' + cssObj.font + '";' ;
+
+    /* Text Shadow */
+
+    cssStyles += "text-shadow:"+cssObj.text_shadow.x+"px "+cssObj.text_shadow.y
+                          +"px "+cssObj.text_shadow.blur+"px "+cssObj.text_shadow.color+";"
 
     return cssStyles ;
   }
 
   $scope.getFonts = function  () {
-    $http.get('https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key='+config.key)
+    $http.get('data/fonts.json')
       .then(function  (res) {
-        $scope.fonts = res.data.items ;
-        console.log(res.data.items[1]);
+        $scope.fonts = res.data ;
     });
   }
 
   $scope.getFontUrl = function  () {
-    return config.apiBase + $scope.currentfont.family.replace(' ','+') ;
+    return "http://fonts.googleapis.com/css?family=" + $scope.current.font.replace(' ','+') ;
   }
 
   $scope.init = function  () {
     $scope.current = $scope.model[0];
-    $scope.currentfont = { family : "Oswald" } ;
+    $scope.getFonts() ;
   }
 
 });

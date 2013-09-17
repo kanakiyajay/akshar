@@ -2,16 +2,13 @@
 
 TO BE DONE
 
-[]  Suffix of px
-[]  text-align
+[x]  text-shadow
+[x]  text-align
 []  spacing
-[]  font
+[x]  font
 [x]  line-height
-[]  font-weight
-[x]color-picker
-[]  multiple texts
-[]  side by side compare
-[]  canvas grid lines
+[x]  font-weight
+[x]  color-picker
 [x]  contenteditable
 []  localStorage
 []  Color-palette
