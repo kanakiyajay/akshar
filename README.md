@@ -24,8 +24,12 @@ Websites Referred
 * http://prajwalkman.github.io/angular-slider/
 * http://docs.angularjs.org/api/ng.directive:ngModel.NgModelController
 * https://github.com/mattwiebe/Better-Google-Fonts
+* https://github.com/firebase/angularFire/issues/83?source=c
+* http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
 
 Libraries
 
 * jQuery  , jQuery UI , Angular and Bootstrap
 * http://bgrins.github.io/spectrum/
+* http://angularfire.com/
+* https://github.com/grevory/angular-local-storage

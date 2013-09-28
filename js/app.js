@@ -6,7 +6,7 @@
 ** Horizontal Width = 910 , Vertical Width = 280 
 **/
 
-var App = angular.module('akshar',['ui.slider']);
+var App = angular.module('akshar',['ui.slider','firebase','LocalStorageModule']);
 
 App.factory('Model',function  () {
   return [
@@ -30,7 +30,7 @@ App.factory('Model',function  () {
   ]
 });
 
-App.controller('mainCtrl',function  ($scope,$http,Model) {
+App.controller('mainCtrl',function  ($scope,$http,Model,angularFire,localStorageService) {
 
   $scope.model = Model ;
   $scope.fonts = [] ;
@@ -145,3 +145,11 @@ App.directive('contenteditable', function() {
       }
     };
   });
+
+function guid() {
+    function _p8(s) {
+        var p = (Math.random().toString(16)+"000000000").substr(2,8);
+        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+    }
+    return _p8() + _p8(true) + _p8(true) + _p8();
+}
