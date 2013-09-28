@@ -26,6 +26,7 @@ Websites Referred
 * https://github.com/mattwiebe/Better-Google-Fonts
 * https://github.com/firebase/angularFire/issues/83?source=c
 * http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
+* https://github.com/angular/angular.js/issues/1838#issuecomment-13994168
 
 Libraries
 
