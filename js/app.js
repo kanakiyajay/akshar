@@ -3,23 +3,22 @@
 ** Licensed under the Apache License v2.0
 ** http://www.apache.org/licenses/LICENSE-2.0
 ** Built by Jay Kanakiya ( @techiejayk )
-** Horizontal Width = 910 , Vertical Width = 280 
+** Horizontal Width = 910 , Vertical Width = 280
 **/
 
-var App = angular.module('akshar',['ngRoute','ui.slider','LocalStorageModule']);
+var App = angular.module('akshar',['ui.slider','hljs','ngClipboard']);
 
 App.factory('Model',function  () {
   return [
-    { 
-      text : "Jay Kanakiya" , 
+    {
+      text : "Jay Kanakiya" ,
       font : "Oswald" ,
-      font_size : 40 , 
-      font_weight : 400 , 
-      letter_spacing : 1 , 
-      color : "#000" , 
-      background_color : "#ccc" , 
-      horizontalpadding : 337 , 
-      verticalpadding : 207,
+      font_size : 40 ,
+      font_weight : 400 ,
+      letter_spacing : 1 ,
+      color : "#000" ,
+      text_align : "center",
+      background_color : "#ccc" ,
       text_shadow : {
         x : 1 ,
         y : 1 ,
@@ -30,17 +29,11 @@ App.factory('Model',function  () {
   ]
 });
 
-App.config(function  ($routeProvider) {
-
-  $routeProvider.when('/',{ template : '&nbsp;' , controller : 'mainCtrl' }) ;
-
-});
-
-App.controller('mainCtrl',function  ($scope,$http,Model,localStorageService) {
+App.controller('mainCtrl',function  ($scope,$http,Model) {
 
   $scope.model = Model ;
   $scope.fonts = [] ;
-  
+
   /* Functions*/
 
   $scope.toToolbar = function  (r) {
@@ -50,15 +43,10 @@ App.controller('mainCtrl',function  ($scope,$http,Model,localStorageService) {
   $scope.getStyle = function  (index) {
     var cssStyles = "" ;
     var cssObj = $scope.model[index] ;
-    var stylesList = [ "font_size" , "letter_spacing" , "color" , "background_color" , "font_weight"] ;
+    var stylesList = [ "font_size" , "letter_spacing" , "color" , "background_color" , "font_weight","text_align"] ;
     stylesList.forEach(function  (i) {
       cssStyles += i.replace("_","-") + ":" + cssObj[i] + ";" ;
     });
-
-    /* For  Positioning  */
-
-    cssStyles += "left :" + cssObj.horizontalpadding + "px ;" ;
-    cssStyles += "top :" + (280 - cssObj.verticalpadding) + "px ;" ;
 
     /* Font-Family */
 
@@ -71,6 +59,8 @@ App.controller('mainCtrl',function  ($scope,$http,Model,localStorageService) {
 
     return cssStyles ;
   }
+
+  $scope.subSource = "#heading{\n "+$scope.getStyle(0).replace(/;/g,";\n ")+"}";
 
   $scope.getFonts = function  () {
     $http.get('data/fonts.json')
@@ -87,7 +77,6 @@ App.controller('mainCtrl',function  ($scope,$http,Model,localStorageService) {
     $scope.current = $scope.model[0];
     $scope.getFonts() ;
   }
-
 });
 
 /* Directives */

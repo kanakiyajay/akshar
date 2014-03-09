@@ -2,15 +2,19 @@
   background: -webkit-canvas(animation) white;
   height:280px ;
   width: 910px;
-  position: relative;
-}
-#box{
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: table;
 }
 
-/* jQuery UI Over-ride */
-.ui-slider-vertical {
-  height: 280px;
+#box{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#canvas{
+	height:280px ;
+	width: 910px;
+}
+.container-full {
+  margin: 0 auto;
+  width: 100%;
 }

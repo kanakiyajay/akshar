@@ -1,125 +1,119 @@
 <html ng-app="akshar">
+
 <head>
-  <title>Akshar | A Typography Experiment</title>
-  <meta charset="UTF-8" />
-  <meta name='description' content='Create great font-styles'/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/spectrum.css">
-  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="js/spectrum.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/canvas.js"></script>
-  <script type="text/javascript" src="js/angular.unstable.min.js"></script>
-  <script type="text/javascript" src="js/angular-slider.js"></script>
-  <script type="text/javascript" src="js/angular-route.min.js"></script>
-  <script type="text/javascript" src="js/angular-localstorage.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
+	<title>Akshar | A Typography Experiment</title>
+	<meta charset="UTF-8" />
+	<meta name='description' content='Create great font-styles' />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/libs/spectrum.css">
+	<link rel="stylesheet" type="text/css" href="css/libs/github.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script type="text/javascript" src="js/libs/jquery.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/libs/spectrum.js"></script>
+	<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/libs/angular.unstable.min.js"></script>
+	<script type="text/javascript" src="js/libs/angular-slider.js"></script>
+	<script type="text/javascript" src="js/libs/highlight.min.js"></script>
+	<script type="text/javascript" src="js/libs/angular-highlightjs.min.js"></script>
+	<script type="text/javascript" src="js/canvas.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 </head>
 
 <body ng-controller="mainCtrl" ng-init="init()">
-  <nav class="navbar navbar-default">
-    <ul class="nav navbar-default">
-      <li ng-click="save()"><a href="">Save</a></li>
-    </ul>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-2">
-        <form role="form">
-          <div class="form-group">
-          <div class="form-group">
-            <label for="">Font</label>
-            <select ng-model="current.font" ng-options="font for font in fonts"></select>
-          </div>
-            <label for="toolbar-text">Text</label>
-            <input class="form-control" ng-model="current.text" type="text" id="toolbar-text">
-          </div>
-          <div class="form-group">
-            <label for="toolbar-font-size">Font-Size</label>
-            <input min="9" max="80" step="0.5" ng-model="current.font_size" type="range" id="toolbar-font-size">
-          </div>
-          <div class="form-group">
-            <label for="toolbar-font-weight">Font-Weight</label>
-            <input min="100" max="900" step="100" ng-model="current.font_weight" type="range" id="toolbar-font-weight">
-          </div>
-          <div class="form-group">
-            <label for="toolbar-letter-spacing">Letter-Spacing</label>
-            <input min="0.5" max="8" step="0.5" ng-model="current.letter_spacing" type="range" id="toolbar-letter-spacing">
-          </div>
-          <div class="form-group">
-            <label for="">Font-Color</label>
-            <ui-colorpicker ng-model="current.color"></ui-colorpicker>
-          </div>
-          <div class="form-group">
-            <label for="">Background Color</label>
-            <ui-colorpicker ng-model="current.background_color"></ui-colorpicker>
-          </div>
-          <div class="form-group">
-            
-          <div class="btn-toolbar">
-            <div class="btn-group">
-              <button type="button" ng-click="current.horizontalpadding = 0" class="btn btn-default"><span class="glyphicon glyphicon-align-left"></span></button>
-              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-center"></span></button>
-              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-right"></span></button>
-          </div>
-          </div>
-          </div>
-          <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#textshadow">
-            Text Shadow
-          </button>
-          <div id="textshadow" class="collapse">
-            <div class="form-group">
-              <label for="toolbar-shadow-x">Offset X</label>
-              <input min="1" max="10" step="1" ng-model="current.text_shadow.x" type="range" id="toolbar-shadow-x">
-            </div>
-            <div class="form-group">
-              <label for="toolbar-shadow-y">Offset Y</label>
-              <input min="1" max="10" step="1" ng-model="current.text_shadow.y" type="range" id="toolbar-shadow-y">
-            </div>
-            <div class="form-group">
-              <label for="toolbar-shadow-blur">Blur</label>
-              <input min="1" max="5" step="1" ng-model="current.text_shadow.blur" type="range" id="toolbar-shadow-blur">
-            </div>
-            <div class="form-group">
-              <label for="toolbar-shadow-color">Color</label>
-              <ui-colorpicker ng-model="current.text_shadow.color"></ui-colorpicker>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="col-lg-1">
-      <div class="row">
-        <div class="col-lg-12" style="opacity:0">Empty</div>
-      </div>
-      <div class="row">
-        <div ui-slider="{orientation:'vertical' , max : 280 }" ng-model="current.verticalpadding"></div>        
-      </div>
-      </div>
-      <div class="col-lg-8">
-        <div class="row">
-          <div class="col-lg-12">
-            <div ui-slider="{animate : true ,max : 910 }" ng-model="current.horizontalpadding"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12" id="dabblet" ng-repeat="typos in model" ng-click="toToolbar($index)" style="background-color :{{current.background_color}}">
-            <h1 strip-br="true" contenteditable ng-model="current.text" id="box" style="{{getStyle($index)}}">Jay Kanakiya</h1>
-            
-          </div>
-        </div>
-      </div>
-    </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-3">
+				<form role="form">
+					<div class="form-group">
+						<div class="form-group">
+							<label for="">Font</label>
+							<select ng-model="current.font" ng-options="font for font in fonts"></select>
+							<!--<ul class="list-unstyled">
+								<li ng-repeat="font in fonts" style="font-family:'{{font}}'">{{font}}</li>
+							</ul>-->
+						</div>
+						<label for="toolbar-text">Text</label>
+						<input class="form-control" ng-model="current.text" type="text" id="toolbar-text">
+					</div>
+					<div class="form-group">
+						<label for="toolbar-font-size">Font-Size</label>
+						<input min="9" max="80" step="0.5" ng-model="current.font_size" type="range" id="toolbar-font-size">
+					</div>
+					<div class="form-group">
+						<label for="toolbar-font-weight">Font-Weight</label>
+						<input min="100" max="900" step="100" ng-model="current.font_weight" type="range" id="toolbar-font-weight">
+					</div>
+					<div class="form-group">
+						<label for="toolbar-letter-spacing">Letter-Spacing</label>
+						<input min="0.5" max="8" step="0.5" ng-model="current.letter_spacing" type="range" id="toolbar-letter-spacing">
+					</div>
+					<div class="form-group">
+						<label for="">Font-Color</label>
+						<ui-colorpicker ng-model="current.color"></ui-colorpicker>
+					</div>
+					<div class="form-group">
+						<label for="">Background Color</label>
+						<ui-colorpicker ng-model="current.background_color"></ui-colorpicker>
+					</div>
+					<div class="form-group">
 
-  <div class="row" ng-init="init()">
-    <div class="col-lg-12">
-      <pre><code class="code">{{getStyle(0)}}</code></pre>
-    </div>
-    </div>
-  </div>
-  <link href="{{getFontUrl()}}" rel='stylesheet' type='text/css'>
+						<div class="btn-toolbar">
+							<div class="btn-group">
+								<button type="button" ng-click="current.text_align = 'left'" class="btn btn-default">
+									<span class="glyphicon glyphicon-align-left"></span>
+								</button>
+								<button type="button" class="btn btn-default" ng-click="current.text_align = 'center'">
+									<span class="glyphicon glyphicon-align-center"></span>
+								</button>
+								<button type="button" class="btn btn-default" ng-click="current.text_align = 'right'">
+									<span class="glyphicon glyphicon-align-right"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#textshadow">
+						Text Shadow
+					</button>
+					<div id="textshadow" class="collapse">
+						<div class="form-group">
+							<label for="toolbar-shadow-x">Offset X</label>
+							<input min="1" max="10" step="1" ng-model="current.text_shadow.x" type="range" id="toolbar-shadow-x">
+						</div>
+						<div class="form-group">
+							<label for="toolbar-shadow-y">Offset Y</label>
+							<input min="1" max="10" step="1" ng-model="current.text_shadow.y" type="range" id="toolbar-shadow-y">
+						</div>
+						<div class="form-group">
+							<label for="toolbar-shadow-blur">Blur</label>
+							<input min="1" max="5" step="1" ng-model="current.text_shadow.blur" type="range" id="toolbar-shadow-blur">
+						</div>
+						<div class="form-group">
+							<label for="toolbar-shadow-color">Color</label>
+							<ui-colorpicker ng-model="current.text_shadow.color"></ui-colorpicker>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-8">
+				<div class="row" id="playground">
+					<div class="col-lg-12" id="dabblet" ng-repeat="typos in model" ng-click="toToolbar($index)" style="background-color :{{current.background_color}}">
+						<h1 id="box" strip-br="true" contenteditable ng-model="current.text" style="{{getStyle($index)}}">Jay Kanakiya</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div hljs source="subSource"></div>
+			</div>
+		</div>
+	</div>
+	<link ng-href="{{getFontUrl()}}" rel='stylesheet' type='text/css'>
 </body>
+
 </html>
